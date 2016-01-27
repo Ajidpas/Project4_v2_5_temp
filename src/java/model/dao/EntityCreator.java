@@ -5,13 +5,14 @@
  */
 package model.dao;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.entity.DBEntity;
+import model.entity.Meal;
 
 /**
  *
@@ -50,21 +51,30 @@ public abstract class EntityCreator implements DAO {
      */
     public Object getAllEntities() throws SQLException, 
             ServerOverloadedException {
-        List<DBEntity> entities = new ArrayList<>();
-        WrapperConnectionProxy wrapperConnection = null;
-        try {
-            wrapperConnection = CONNECTION_POOL.getConnection();
-            Statement st = wrapperConnection.createStatement();
-            ResultSet rs = st.executeQuery(sqlForAllEntities);
-            while (rs.next()) {
-                entities.add(getEntity(rs));
-            }
-        } finally {
-            if (wrapperConnection != null) {
-                wrapperConnection.close();
-            }
-        }
+//        List<DBEntity> entities = new ArrayList<>();
+//        WrapperConnectionProxy wrapperConnection = null;
+//        try {
+//            wrapperConnection = CONNECTION_POOL.getConnection();
+//            Statement st = wrapperConnection.createStatement();
+//            ResultSet rs = st.executeQuery(sqlForAllEntities);
+//            while (rs.next()) {
+//                entities.add(getEntity(rs));
+//            }
+//        } finally {
+//            if (wrapperConnection != null) {
+//                wrapperConnection.close();
+//            }
+//        }
+        List<Meal> entities = getMealsTemp();
         return entities;
+    }
+    
+    private List<Meal> getMealsTemp() {
+        List<Meal> meals = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            meals.add(new Meal(BigDecimal.TEN, "Express Lunch", "Poridge" + new Integer(i).toString(), "description", i));
+        }
+        return meals;
     }
     
     /**

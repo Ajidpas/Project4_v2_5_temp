@@ -35,6 +35,10 @@ public class HomePage extends GetAction {
      */
     @Override
     public String doExecute() throws ServletException, IOException {
+        
+        session.setAttribute("message", "login.errormessage.nosuchuser");
+        session.setAttribute("errorMessage", "login.errormessage.empty");
+        
         return ConfigManager.getProperty("path.home");
     }
 

@@ -43,8 +43,8 @@
                     </tr>
                     <c:forEach items="${meals}" var="meal">
                         <tr>
-                            <td>${meal.name}</td>
-                            <td>${meal.description}</td>
+                            <td><c:out value="${meal.name}" /></td>
+                            <td><c:out value="${meal.description}"/></td>
                             <td><fmt:formatNumber value="${meal.price}" type="currency" currencyCode="USD" />
                             </td>
                             <c:if test="${not empty user}" >
